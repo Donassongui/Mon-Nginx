@@ -1,0 +1,31 @@
+name: Création de l'image
+
+on: 
+   push: 
+    branches: [main]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    #Recupertaion du code source
+      - name: Checkout code
+        uses: actions/checkout@V3
+    #Connexion au registre
+      - name: Connexion au registre de Github
+        uses: docker/login-action@v3
+        with:
+          context:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    #Construction de l'image
+      - name: Construction de l'image docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/mon-site:latest
+  
+  
