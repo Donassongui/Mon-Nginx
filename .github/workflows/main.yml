@@ -16,6 +16,11 @@ jobs:
     #Recupertaion du code source
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Install and run zizmor audit
+        run: |
+          pip install zizmor
+          zizmor .github/workflows/Build.yml
           
     #Connexion au registre
       - name: Connexion au registre de Github
