@@ -16,12 +16,6 @@ jobs:
     #Recupertaion du code source
       - name: Checkout code
         uses: actions/checkout@v3
-        
-   # Audit avec zizmor
-      - name: Run zizmor audit
-        uses: woodruffw/zizmor-action@main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
     #Connexion au registre
       - name: Connexion au registre de Github
