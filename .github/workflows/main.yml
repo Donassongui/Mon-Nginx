@@ -16,6 +16,13 @@ jobs:
     #Recupertaion du code source
       - name: Checkout code
         uses: actions/checkout@v3
+        
+   # Audit avec zizmor
+      - name: Run zizmor audit
+        uses: woodruffw/zizmor-action@v1
+        with:
+          zizmor-version: latest
+          
     #Connexion au registre
       - name: Connexion au registre de Github
         uses: docker/login-action@v3
@@ -24,6 +31,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
     #Construction de l'image
       - name: Construction de l'image docker
         uses: docker/build-push-action@v5
@@ -31,11 +39,3 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/donassongui/mon-site:latest
-   # Audit avec zizmor
-      - name: Run zizmor audit
-        uses: woodruffw/zizmor-action@v1
-        with:
-          zizmor-version: latest
-
-  
-  
